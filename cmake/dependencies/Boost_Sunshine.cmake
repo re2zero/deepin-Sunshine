@@ -35,13 +35,33 @@ if(NOT Boost_FOUND)
 
     set(BOOST_ENABLE_CMAKE ON)
 
+    # 定义本地文件路径
+    set(BOOST_LOCAL_FILE "${CMAKE_SOURCE_DIR}/third-party/boost-1.85.0-cmake.tar.xz")  # 替换为你的本地文件路径
+
+    # 检查本地文件是否存在
+    if(NOT EXISTS ${BOOST_LOCAL_FILE})
+        message(STATUS "Local Boost file not found. Downloading from URL.")
+        file(DOWNLOAD
+            "https://hub.nuaa.cf/boostorg/boost/releases/download/boost-1.85.0/boost-1.85.0-cmake.tar.xz"
+                ${BOOST_LOCAL_FILE}
+                EXPECTED_HASH MD5=BADEA970931766604D4D5F8F4090B176
+                SHOW_PROGRESS
+        )
+    else()
+        message(STATUS "Using local Boost file: ${BOOST_LOCAL_FILE}")
+    endif()
+
+
+
     # Limit boost to the required libraries only
     set(BOOST_INCLUDE_LIBRARIES
             ${BOOST_COMPONENTS})
-    set(BOOST_URL
-            "https://github.com/boostorg/boost/releases/download/boost-1.85.0/boost-1.85.0-cmake.tar.xz")
-    set(BOOST_HASH
-            "MD5=BADEA970931766604D4D5F8F4090B176")
+#     set(BOOST_URL
+#             "https://hub.nuaa.cf/boostorg/boost/releases/download/boost-1.85.0/boost-1.85.0-cmake.tar.xz")
+#     set(BOOST_HASH
+#             "MD5=BADEA970931766604D4D5F8F4090B176")
+    set(BOOST_URL ${BOOST_LOCAL_FILE})
+    set(BOOST_HASH "MD5=BADEA970931766604D4D5F8F4090B176")
 
     if(CMAKE_VERSION VERSION_LESS "3.24.0")
         FetchContent_Declare(

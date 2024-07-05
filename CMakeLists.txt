@@ -9,6 +9,9 @@ project(Sunshine VERSION 0.0.0
 
 set(PROJECT_LICENSE "GPL-3.0")
 
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
 set(PROJECT_LONG_DESCRIPTION "Offering low latency, cloud gaming server capabilities with support for AMD, Intel, \
 and Nvidia GPUs for hardware encoding. Software encoding is also available. You can connect to Sunshine from any \
 Moonlight client on a variety of devices. A web UI is provided to allow configuration, and client pairing, from \

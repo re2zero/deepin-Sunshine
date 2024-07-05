@@ -338,7 +338,7 @@ namespace util {
 
     std::fill_n(buf + buf_size, padding, 0);
 
-    std::for_each_n(buf, buf_size, [&](auto &el) {
+    std::for_each(buf, buf + buf_size, [&](auto &el) {
       while (!is_convertable(*data)) { --data; }
       std::uint8_t ch_r = convert(*data--);
 

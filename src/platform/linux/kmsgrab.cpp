@@ -448,7 +448,7 @@ namespace platf {
         }
 
         std::vector<connector_t> monitors;
-        std::for_each_n(resources->connectors, resources->count_connectors, [this, &conn_type_count, &monitors](std::uint32_t id) {
+        std::for_each(resources->connectors, resources->connectors + resources->count_connectors, [this, &conn_type_count, &monitors](std::uint32_t id) {
           auto conn = connector(id);
 
           std::uint32_t crtc_id = 0;
@@ -589,7 +589,7 @@ namespace platf {
       std::stringstream ss;
 
       ss << "Format ["sv;
-      std::for_each_n(plane->formats, plane->count_formats - 1, [&ss](auto format) {
+      std::for_each(plane->formats, plane->formats + plane->count_formats - 1, [&ss](auto format) {
         ss << util::view(format) << ", "sv;
       });
 

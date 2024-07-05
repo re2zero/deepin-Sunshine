@@ -5,6 +5,7 @@
 #include <boost/locale.hpp>
 #include <inputtino/input.hpp>
 #include <libevdev/libevdev.h>
+#include <iomanip>
 
 #include "src/config.h"
 #include "src/logging.h"
@@ -34,7 +35,7 @@ namespace platf::keyboard {
     }
 
     std::string hex_unicode(ss.str());
-    std::ranges::transform(hex_unicode, hex_unicode.begin(), ::toupper);
+    std::transform(hex_unicode.begin(), hex_unicode.end(), hex_unicode.begin(), ::toupper);
     return hex_unicode;
   }
 

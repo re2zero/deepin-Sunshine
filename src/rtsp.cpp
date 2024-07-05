@@ -839,7 +839,7 @@ namespace rtsp_stream {
 
       ss << "a=fmtp:97 surround-params="sv << stream_config.channelCount << stream_config.streams << stream_config.coupledStreams;
 
-      std::for_each_n(mapping_p, stream_config.channelCount, [&ss](std::uint8_t digit) {
+      std::for_each(mapping_p, mapping_p + stream_config.channelCount, [&ss](std::uint8_t digit) {
         ss << (char) (digit + '0');
       });
 

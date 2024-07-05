@@ -240,7 +240,7 @@ namespace gl {
     auto names = (const char **) alloca(count * sizeof(const char *));
     auto names_p = names;
 
-    std::for_each_n(members, count, [names_p](auto &member) mutable {
+    std::for_each(members, members + count, [names_p](auto &member) mutable {
       *names_p++ = std::get<0>(member);
     });
 

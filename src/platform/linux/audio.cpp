@@ -37,7 +37,7 @@ namespace platf {
     std::stringstream ss;
 
     ss << "rate=48000 sink_name="sv << name << " format=s16le channels="sv << channels << " channel_map="sv;
-    std::for_each_n(mapping, channels - 1, [&ss](std::uint8_t pos) {
+    std::for_each(mapping, mapping + channels - 1, [&ss](std::uint8_t pos) {
       ss << pa_channel_position_to_string(position_mapping[pos]) << ',';
     });
 
@@ -77,7 +77,7 @@ namespace platf {
     pa_channel_map pa_map;
 
     pa_map.channels = channels;
-    std::for_each_n(pa_map.map, pa_map.channels, [mapping](auto &channel) mutable {
+    std::for_each(pa_map.map, pa_map.map + pa_map.channels, [mapping](auto &channel) mutable {
       channel = position_mapping[*mapping++];
     });
 
